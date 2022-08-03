@@ -51,10 +51,13 @@ topics:
     web_url: https://github.com/topics/css
     image_url: https://raw.githubusercontent.com/github/explore/6c6508f34230f0ac0d49e847a326429eefbfc030/topics/css/css.png
 
-  - name: Web design
+  - name: Tianshou
+    web_url: https://github.com/thu-ml/tianshou
+    image_url: https://raw.githubusercontent.com/thu-ml/tianshou/master/docs/_static/images/tianshou-logo.png
 
-  - name: Sass
-    web_url: https://github.com/topics/sass
-    image_url: https://raw.githubusercontent.com/github/explore/6c6508f34230f0ac0d49e847a326429eefbfc030/topics/sass/sass.png
+
+  - name: PyTorch
+    web_url: https://pytorch.org/
+    image_url: https://github.com/pytorch/pytorch/blob/master/docs/source/_static/img/pytorch-logo-dark.png
 
 theme: jekyll-theme-architect
