@@ -58,6 +58,6 @@ topics:
 
   - name: PyTorch
     web_url: https://pytorch.org/
-    image_url: https://github.com/pytorch/pytorch/blob/master/docs/source/_static/img/pytorch-logo-dark.png
+    image_url: https://raw.githubusercontent.com/pytorch/pytorch/master/docs/source/_static/img/pytorch-logo-dark.png
 
 theme: jekyll-theme-architect
