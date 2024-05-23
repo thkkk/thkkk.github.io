@@ -53,12 +53,12 @@ topics:
 
   - name: OI & Math
 
-  - name: Tianshou (Deep RL Library)
-    web_url: https://github.com/thu-ml/tianshou
-    image_url: https://raw.githubusercontent.com/thu-ml/tianshou/master/docs/_static/images/tianshou-logo.png
+  # - name: Tianshou (Deep RL Library)
+  #   web_url: https://github.com/thu-ml/tianshou
+  #   image_url: https://raw.githubusercontent.com/thu-ml/tianshou/master/docs/_static/images/tianshou-logo.png
 
-  - name: PyTorch
-    web_url: https://pytorch.org/
-    image_url: https://raw.githubusercontent.com/pytorch/pytorch/master/docs/source/_static/img/pytorch-logo-dark.png
+  # - name: PyTorch
+  #   web_url: https://pytorch.org/
+  #   image_url: https://raw.githubusercontent.com/pytorch/pytorch/master/docs/source/_static/img/pytorch-logo-dark.png
 
 theme: jekyll-theme-architect
