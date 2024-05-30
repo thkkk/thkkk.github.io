@@ -154,11 +154,11 @@
                   <span class="icon">
                       <i class="fab fa-github"></i>
                   </span>
-                  <span>Code</span>
+                  <span>Code & Data</span>
                   </a>
               </span>
               <!-- Dataset Link. -->
-              <span class="link-block">
+              <!-- <span class="link-block">
                 <a href="https://github.com/google/nerfies/releases/tag/0.1"
                    class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
@@ -166,6 +166,7 @@
                   </span>
                   <span>Data</span>
                   </a>
+              </span> -->
             </div>
 
           </div>
@@ -300,6 +301,7 @@
     </div>
     <!--/ Paper video. -->
   </div>
+
 </section>
 
 
@@ -313,7 +315,8 @@
         <div class="content">
           <h2 class="title is-3">Crossing knee-deep snow</h2>
           <p>
-            For scenes that have never been seen in the dataset, such as knee-deep snow, 
+            For scenes that have <b>never been seen in the dataset</b> (which is is collected in simulator), 
+            such as knee-deep snow, 
             FCNet policy can show good locomotion performance, robustness and generalization.
           </p>
           <video id="dollyzoom" autoplay controls muted loop playsinline height="100%">
@@ -330,9 +333,10 @@
         <div class="columns is-centered">
           <div class="column content">
             <p>
-                The FCNet policy slammed through the snow with ease, 
-                and we found that the FCNet policy lasted longer than the traditional RL policy, 
-                probably due to the filtering of high-frequency noise.
+                The FCNet policy slammed through the snow with ease. 
+                We find that the FCNet policy <b>lasts longer and has less joint 
+                heating</b> than the traditional RL policy, which may be due to the fact 
+                that FCNet filters out the high-frequency noise, making the output action softer.
             </p>
             <video id="matting-video" controls playsinline height="100%">
               <source src="./static/videos/dash.mp4"
@@ -343,6 +347,11 @@
         </div>
       </div>
     </div>
+    <p>
+      We find that a limited amount of simulator data (e.g. 60M steps or less) can cover a very large 
+      amount of real-world terrain, so we expect to utilize a large amount of cheap simulator 
+      data in the future to lead to scaling laws for embodied AI, including robotic manipulation.
+    </p>
     <!--/ Matting. -->
 
     <!-- methods images -->
@@ -352,22 +361,77 @@
         <div class="content">
           <h2 class="title is-3">Methods</h2>
           <p>
-            Consider MDP as a sequence modeling problem. Especially in a continuous state 
+            One common feature of the existing works on Transformer for decision making is that they 
+            mainly focus on modeling 
+            the time-varying features of robotic trajectories in <b>time domain</b> by drawing a direct 
+            analogy with that in modeling natural language sentences. We argue that this is insufficient in 
+            embodied learning, which has its unique features.
+
+            Specifically, we take a close examination on embodied learning from the <b>frequency domain</b>
+            and observe that the energy density distribution of a robot's state sequence is mainly concentrated
+             in the low-frequency part, as shown in figure below. This is due to the 
+             inherent continuity and smoothness in natural physical phenomena and robot motors.
+          </p>
+          <p style="text-align:center;">
+            <!-- small image -->
+            <image src="./static/images/plot_energy_merged.png" class="img-responsive" style="width: 50%;">
+          </p>
+
+          <p>
+            However, by directly modeling trajectories in the time domain, existing works on Transformer and 
+            its variants do not take into account this inductive bias for robotic control, resulting in 
+            low data efficiency and high inference latency.
+            To address these issues, we propose a new architecture of Fourier Controller Network (FCNet) 
+            based on the key observation in the frequency domain. 
+            FCNet grounds the inductive bias in robotic control inspired by the Fourier transform.
+
+            We conceptualize low-level continuous control as a sequential decision-making problem. 
+            Our neural model is adept at predicting subsequent actions by analyzing a historical window 
+            of state data, as depicted in the figure below.
+            We concatenate action, reward, and state tokens together and then perform parallel training and 
+            real-time decision inference on this sequence.
+            <!-- Especially in a continuous state 
             space like embodied learning, it makes sense to perform Fourier-based modeling and
              training in the frequency domain of time-domain sequences within a window [t, t+n-1].
               In the inference phase T=t+n-1 to T=t+n, the sliding window in 
-              Sec. <i>Reprensentation of Recurrent Inference</i> is utilized for efficient inference. 
+              Sec. <i>Reprensentation of Recurrent Inference</i> is utilized for efficient inference.  -->
           </p>
           <p style="text-align:center;">
-            <image src="./static/images/sequence_model.png" class="img-responsive">
+            <image src="./static/images/sequence_model.png" class="img-responsive" style="width: 70%;">
           </p>
 
           
           <p>
-            TODO. 
+            Guided by the observation in the frequency domain and the inductive reasoning that 
+            differential dynamics are simplified in the frequency domain, FCNet introduces a causal
+            spectral convolution (CSC) block.  It employs the Short-Time Fourier Transform (STFT) and 
+            linear transform 
+            for efficient feature extraction in the <b>frequency domain</b>, distinct from Transformer 
+            and other prevalent architectures.
+
+            As shown in figure below, we focus on the $m$ lowest modes, with $m$ strategically selected to 
+            be $\ll n$, where $n$ is the length of the state window. 
+            Consequently, the high-frequency part in the frequency domain is filtered, allowing us to 
+            focus solely on these $m$ lowest modes. 
+            The CSC makes efficient training and real-time inference possible, and has also been 
+            shown to have good  performance in experiments. 
           </p>
           <p style="text-align:center;">
             <image src="./static/images/model_arch.png" class="img-responsive">
+          </p>
+          <p>
+            Furthermore, to achieve efficient parallel training and inference, 
+            which necessitates causality in the model's sequential outputs (dependent only on previous inputs)
+            and the rapid generation of each output token for real-time response,
+            we introduce parallel training based on Fast Fourier transform (FFT), 
+            and recurrent inference based on sliding discrete Fourier transform (Sliding DFT) in FCNet.
+          </p>
+          <p style="text-align:center;">
+            <image src="./static/images/comparison.png" class="img-responsive">
+          </p>
+          <p>
+            This efficiency marks a significant speed advantage over traditional Transformer models,
+             enabling handling the complexities of real-time continuous control in dynamic environments.
           </p>
         </div>
       </div>
@@ -381,15 +445,24 @@
         <div class="content">
           <h2 class="title is-3">Some experimental results</h2>
           <p>
-            TODO. 
+            Comprehensive analyses in both simulated (e.g., D4RL) and real-world environments 
+            (e.g., robot locomotion) demonstrate FCNet's substantial efficiency and effectiveness 
+            over existing methods such as Transformer, RetNet.
+            FCNet outperforms Transformer on multi-environmental robotics datasets of 
+            all types of sizes (from 1.9M to 120M).
+            The results show that FCNet significantly outperforms Transformer with limited data.
           </p>
           <p style="text-align:center;">
-            <image src="./static/images/plot_data_size.png" class="img-responsive">
+            <image src="./static/images/plot_data_size.png" class="img-responsive" style="width: 70%;">
           </p>
 
           
           <p>
-            TODO. 
+            We test the inference latency of the Transformer (with KV cache) and FCNet under different
+             hyperparameter settings related to model structure. The results show that the upward curve 
+             of the inference latency of FCNet is significantly slower than that of Transformer as the 
+             context length, number of layers, and hidden size are improved. This demonstrates the efficiency
+             of the inference of FCNet.
           </p>
           <p style="text-align:center;">
             <image src="./static/images/plot_only_arch_speed.png" class="img-responsive">
