@@ -301,11 +301,72 @@
                   frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
         </div> -->
         <video id="dollyzoom" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/demo_video_manibox_v2.mp4"
+            <source src="./static/videos/manibox/demo_video_manibox_v2.mp4"
                     type="video/mp4">
           </video>
       </div>
     </div>
+
+    
+    <div class="columns is-centered">
+
+      <!-- Visual Effects. -->
+      <div class="column">
+        <div class="content">
+          <h2 class="title is-3">Extended to multi-object complex tasks: Pouring Water</h2>
+          <p>
+            To demonstrate the extensibility of our approach, we modify the teacher policy 
+            and generate data that detects both bottles and cups in the bounding box for 
+            the pouring task.
+          </p>
+          <video id="dollyzoom" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/manibox/pour_water_inte.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+      </div>
+      <!--/ Visual Effects. -->
+
+      <!-- Matting. -->
+      <div class="column">
+        <h2 class="title is-3">Grasp the cup's handle</h2>
+        <div class="columns is-centered">
+          <div class="column content">
+            <p>
+              To demonstrate the extensibility of our approach, 
+              we use a detection model to recognize parts of irregular objects, 
+              which enables the grasping of the cup's handle.
+            </p>
+            <video id="matting-video" controls playsinline height="100%">
+              <source src="./static/videos/manibox/demo_handle_v2.mp4"
+                      type="video/mp4">
+            </video>
+          </div>
+
+        </div>
+      </div>
+
+      
+    </div>
+
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h3 class="title is-3">Get objects from mid-air, from people's hands, and cluttered env.</h3>
+        <!-- <div class="publication-video">
+          <iframe src="https://www.youtube.com/embed/MrKrnHhk8IA?rel=0&amp;showinfo=0"
+                  frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        </div> -->
+        <p>
+          ManiBox can also get objects from mid-air, from people's hands,
+          and work in very cluttered environments.
+        </p>
+        <video id="dollyzoom" autoplay controls muted loop playsinline height="60%">
+            <source src="./static/videos/manibox/mid-air_messy-table.mp4"
+                    type="video/mp4">
+          </video>
+      </div>
+    </div>
+
     <!--/ Paper video. -->
     
     <!-- methods images -->
