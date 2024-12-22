@@ -394,6 +394,15 @@
         <div class="content">
           <h2 class="title is-3" style="text-align:center;">Spatial Scaling Laws -- Michaelis-Menten Curve</h2>
           <p>
+            The success rate and the data volume show the Michaelis-Menten kinetic curve: when 
+            <b>the success rate is low, increasing the data volume can significantly improve
+             the success rate</b>; after the success rate reaches 80%-90%, even if the data volume continues 
+             to increase, the success rate of the imitation learning policy tends to be <b>saturated</b>,
+              and the increase is slow; when the data volume tends to be infinite, the success rate 
+              tends to be 100%. The relationship between the success rate and the data volume
+               is expressed by the formula: <b>success_rate = 100% * D / (K_m + D)</b>, 
+              where D is the data volume of imitation policy, 
+              K_m is the data volume required to achieve 50% success rate.
           </p>
           <p style="text-align:center;">
             <image src="./static/images/manibox/spatial_scaling.png" class="img-responsive" style="width:90%;">
@@ -419,6 +428,13 @@
         <div class="content">
           <h2 class="title is-3" style="text-align:center;">Spatial Generalization, Object Generalization, and Background Generalization</h2>
           <p>
+            The data volume required for spatial generalization is related to the spatial volume
+             in an power-law relationship, i.e., more data significantly improves the ability to 
+             generalize over a larger spatial range. 
+             For example, if we want to generalize to x times the spatial volume, 
+             then the data volume needs to be expanded by about x^0.35 times. 
+             In the setting in the paper, 34400cm^3 versus 1cm^3, the data volume required for 
+             spatial generalization of the former is 34400^0.35=38 times that of the latter.
           </p>
           <p style="text-align:center;">
             <image src="./static/images/manibox/demo_fig.png" class="img-responsive" style="width:90%;">
