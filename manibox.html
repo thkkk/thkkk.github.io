@@ -119,7 +119,8 @@
           <div class="is-size-5 publication-authors">
             <span class="author-block"><sup>1</sup>Tsinghua University</span>
             <span class="author-block"><sup>2</sup>National University of Singapore</span><br>
-            <span class="author-block"><sup>*</sup>Equal contribution</span>
+            <span class="author-block"><sup>*</sup>Equal contribution</span><br>
+            <span> <b>Keywords: 2 Scaling Laws of Spatial Generalization;</b> Using Low-dim Visual Features for Manipulation; Sim2Real</span>
           </div>
 
           <!-- <div class="is-size-5 publication-authors">
@@ -397,8 +398,9 @@
             The success rate and the data volume show the Michaelis-Menten kinetic curve: when 
             <b>the success rate is low, increasing the data volume can significantly improve
              the success rate</b>; after the success rate reaches 80%-90%, even if the data volume continues 
-             to increase, the success rate of the imitation learning policy tends to be <b>saturated</b>,
-              and the increase is slow; when the data volume tends to be infinite, the success rate 
+             to increase, the success rate of the imitation learning policy tends to be 
+             <span style="color: red;"><b>saturated</b>,
+              and the increase is slow</span>; when the data volume tends to be infinite, the success rate 
               tends to be 100%. The relationship between the success rate and the data volume
                is expressed by the formula: <b>success_rate = 100% * D / (K_m + D)</b>, 
               where D is the data volume of imitation policy, 
@@ -431,8 +433,8 @@
             The data volume required for spatial generalization is related to the spatial volume
              in an power-law relationship, i.e., more data significantly improves the ability to 
              generalize over a larger spatial range. 
-             For example, if we want to generalize to x times the spatial volume, 
-             then the data volume needs to be expanded by about x^0.35 times. 
+             For example, <b>if we want to generalize to x times the spatial volume, 
+             then the data volume needs to be expanded by about x^0.35 times</b>. 
              In the setting in the paper, 34400cm^3 versus 1cm^3, the data volume required for 
              spatial generalization of the former is 34400^0.35=38 times that of the latter.
           </p>
