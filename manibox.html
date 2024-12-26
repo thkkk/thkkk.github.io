@@ -378,11 +378,13 @@
           <h2 class="title is-3" style="text-align:center;">Overview</h2>
           <p>
             Our setting involves the more challenging first-person robot manipulation rather than the conventional third-person perspective.
-            The idea behind ManiBox lies in: <br>
-            1. A scalable and automated method for generating action data is used to train the policy module, building the model's understanding of actions 
-            and alleviating the issue of data scarcity in the action modality. (i.e. policy which generates actions) <br>
-            2. Internet-scale data is fully utilized to develop generalizable models in visual and textual modalities, providing essential guidance for task completion.
-            (i.e. low-dimensional visual features like bounding boxes and large-scale pretrained visual models) <br>
+            The idea behind ManiBox lies in:
+            <ol>
+              <li><b>A scalable and automated method for generating action data</b> is used to train the policy module, building the model's understanding of actions 
+            and alleviating the issue of data scarcity in the action modality. (i.e. policy which generates actions) </li>
+              <li><b>Internet-scale data</b> is fully utilized to pretrain generalizable models in visual and textual modalities, providing essential guidance for task completion.
+            (i.e. low-dimensional visual features like bounding boxes and large-scale pretrained visual models) </li>
+            </ol>
           </p>
           <p style="text-align:center;">
             <image src="./static/images/manibox/overview.png" class="img-responsive" style="width:90%;">
@@ -400,13 +402,18 @@
         <div class="content">
           <h2 class="title is-3" style="text-align:center;">Spatial Scaling Laws -- Michaelis-Menten Curve</h2>
           <p>
-            The success rate and the data volume show the Michaelis-Menten kinetic curve: when 
-            <b>the success rate is low, increasing the data volume can significantly improve
-             the success rate</b>; after the success rate reaches 80%-90%, even if the data volume continues 
+            The success rate and the data volume show the Michaelis-Menten kinetic curve: <br>
+            <ul>
+            <li><b>when the success rate is low, increasing the data volume can significantly improve
+              the success rate</b>; </li>
+              <li> after the success rate reaches 80%-90%, even if the data volume continues 
              to increase, the success rate of the imitation learning policy tends to be 
              <span style="color: red;"><b>saturated</b>,
-              and the increase is slow</span>; when the data volume tends to be infinite, the success rate 
-              tends to be 100%. The relationship between the success rate and the data volume
+              and the increase is slow</span>; </li>
+              <li>when the data volume tends to be infinite, the success rate 
+              tends to be 100%.</li>
+            </ul>
+            The relationship between the success rate and the data volume
                is expressed by the formula: <b>success_rate = 100% * D / (K_m + D)</b>, 
               where D is the data volume of imitation policy, 
               K_m is the data volume required to achieve 50% success rate.
@@ -420,6 +427,15 @@
         <div class="content">
           <h2 class="title is-3" style="text-align:center;">Power-law Relationship Between Spatial Volume and Data volume needed </h2>
           <p>
+            The data volume required for spatial generalization is related to the spatial volume
+             in an power-law relationship, i.e., more data significantly improves the ability to 
+             generalize over a larger spatial range. 
+             <ul>
+             <li>For example, in our settings, <b>if we want to generalize to x times the spatial volume, 
+             then the data volume needs to be expanded by about x^0.35 times</b>. </li>
+             <li> In the setting in the paper, 34400cm^3 versus 1cm^3, the data volume required for 
+             spatial generalization of the former is 34400^0.35=<b>38 times</b> that of the latter.</li>
+            </ul>
           </p>
           <p style="text-align:center;">
             <image src="./static/images/manibox/volume_data.png" class="img-responsive" style="width:60%;">
@@ -435,13 +451,6 @@
         <div class="content">
           <h2 class="title is-3" style="text-align:center;">Spatial Generalization, Object Generalization, and Background Generalization</h2>
           <p>
-            The data volume required for spatial generalization is related to the spatial volume
-             in an power-law relationship, i.e., more data significantly improves the ability to 
-             generalize over a larger spatial range. 
-             For example, <b>if we want to generalize to x times the spatial volume, 
-             then the data volume needs to be expanded by about x^0.35 times</b>. 
-             In the setting in the paper, 34400cm^3 versus 1cm^3, the data volume required for 
-             spatial generalization of the former is 34400^0.35=38 times that of the latter.
           </p>
           <p style="text-align:center;">
             <image src="./static/images/manibox/demo_fig.png" class="img-responsive" style="width:90%;">
