@@ -257,6 +257,21 @@
 
 <section class="section">
   <div class="container is-max-desktop">
+    <!-- Paper video. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Video</h2>
+        <!-- <div class="publication-video">
+          <iframe src="https://www.youtube.com/embed/MrKrnHhk8IA?rel=0&amp;showinfo=0"
+                  frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        </div> -->
+        <video id="dollyzoom" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/full_video.mp4"
+                    type="video/mp4">
+          </video>
+      </div>
+    </div>
+    <!--/ Paper video. -->
     <!-- Abstract. -->
     <div class="columns is-centered has-text-centered">
       <div class="column is-four-fifths">
@@ -287,21 +302,6 @@
     </div>
     <!--/ Abstract. -->
 
-    <!-- Paper video. -->
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-four-fifths">
-        <h2 class="title is-3">Video</h2>
-        <!-- <div class="publication-video">
-          <iframe src="https://www.youtube.com/embed/MrKrnHhk8IA?rel=0&amp;showinfo=0"
-                  frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-        </div> -->
-        <video id="dollyzoom" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/full_video.mp4"
-                    type="video/mp4">
-          </video>
-      </div>
-    </div>
-    <!--/ Paper video. -->
   </div>
 
 </section>
@@ -353,6 +353,11 @@
       We find that a limited amount of simulator data (e.g. 60M steps or less) can cover a very large 
       amount of real-world terrain, so we expect to utilize a large amount of cheap simulator 
       data in the future to lead to scaling laws for embodied AI, including robotic manipulation.
+    </p>
+    
+    <p style="text-align:center;">
+      <!-- small image -->
+      <image src="./static/images/fcnet_16demo.png" class="img-responsive" style="width: 100%;">
     </p>
     <!--/ Matting. -->
 
